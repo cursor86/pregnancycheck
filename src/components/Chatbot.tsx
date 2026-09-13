@@ -49,12 +49,12 @@ export default function Chatbot() {
             transition={{ duration: 0.2 }}
             className="glass-strong mb-4 flex h-96 w-80 flex-col overflow-hidden rounded-3xl shadow-2xl shadow-accent-deep/20"
           >
-            <div className="flex items-center justify-between border-b border-white/50 px-4 py-3">
+            <div className="flex items-center justify-between border-b border-panel/50 px-4 py-3">
               <p className="font-semibold text-slate">Pregnancy FAQ Bot</p>
               <button
                 type="button"
                 onClick={() => setOpen(false)}
-                className="rounded-full p-1 text-slate/50 transition hover:bg-white/60 hover:text-slate"
+                className="rounded-full p-1 text-slate/50 transition hover:bg-panel/60 hover:text-ink"
                 aria-label="Close chat"
               >
                 <X size={16} />
@@ -68,7 +68,7 @@ export default function Chatbot() {
                   className={`max-w-[85%] whitespace-pre-line rounded-2xl px-3.5 py-2 text-sm ${
                     m.role === "user"
                       ? "ml-auto bg-accent-deep text-white"
-                      : "bg-white/80 text-slate"
+                      : "bg-panel/80 text-ink"
                   }`}
                 >
                   {m.text}
@@ -76,12 +76,12 @@ export default function Chatbot() {
               ))}
             </div>
 
-            <form onSubmit={handleSubmit} className="flex gap-2 border-t border-white/50 p-3">
+            <form onSubmit={handleSubmit} className="flex gap-2 border-t border-panel/50 p-3">
               <input
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 placeholder="Ask a question..."
-                className="flex-1 rounded-full border border-white/60 bg-white/80 px-4 py-2 text-sm text-slate outline-none focus:ring-2 focus:ring-accent-deep/40"
+                className="flex-1 rounded-full border border-panel/60 bg-panel/80 px-4 py-2 text-sm text-ink outline-none focus:ring-2 focus:ring-accent-deep/40"
               />
               <button
                 type="submit"

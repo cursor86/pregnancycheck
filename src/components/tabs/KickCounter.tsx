@@ -81,14 +81,14 @@ export default function KickCounter() {
             type="button"
             onClick={stopSession}
             disabled={!isActive && count === 0}
-            className="inline-flex items-center gap-1.5 rounded-full bg-white/70 px-4 py-2 text-sm font-medium text-slate transition hover:bg-white disabled:cursor-not-allowed disabled:opacity-40"
+            className="inline-flex items-center gap-1.5 rounded-full bg-panel/70 px-4 py-2 text-sm font-medium text-ink transition hover:bg-panel/90 disabled:cursor-not-allowed disabled:opacity-40"
           >
             <Square size={14} /> Stop &amp; save
           </button>
           <button
             type="button"
             onClick={resetSession}
-            className="inline-flex items-center gap-1.5 rounded-full bg-white/70 px-4 py-2 text-sm font-medium text-slate transition hover:bg-white"
+            className="inline-flex items-center gap-1.5 rounded-full bg-panel/70 px-4 py-2 text-sm font-medium text-ink transition hover:bg-panel/90"
           >
             <RotateCcw size={14} /> Reset
           </button>
@@ -106,7 +106,7 @@ export default function KickCounter() {
             {history.map((h) => (
               <div
                 key={h.id}
-                className="flex items-center justify-between rounded-xl bg-white/60 px-4 py-2.5 text-sm"
+                className="flex items-center justify-between rounded-xl bg-panel/60 px-4 py-2.5 text-sm"
               >
                 <span className="font-semibold text-slate">{h.count} kicks</span>
                 <span className="text-slate/60">{formatDuration(h.durationSec)}</span>

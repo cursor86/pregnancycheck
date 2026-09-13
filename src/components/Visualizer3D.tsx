@@ -33,7 +33,7 @@ export default function Visualizer3D({
           {variant === "bump" ? <Baby size={72} strokeWidth={1.4} /> : <Sparkles size={72} strokeWidth={1.4} />}
         </motion.div>
 
-        <div className="absolute bottom-6 flex items-center gap-2 rounded-full bg-white/70 px-4 py-1.5 text-xs font-medium text-slate/70 backdrop-blur">
+        <div className="absolute bottom-6 flex items-center gap-2 rounded-full bg-panel/70 px-4 py-1.5 text-xs font-medium text-ink/70 backdrop-blur">
           <span className="h-1.5 w-1.5 rounded-full bg-accent-deep animate-pulse" />
           {label}
         </div>

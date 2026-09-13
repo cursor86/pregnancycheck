@@ -6,9 +6,12 @@ import {
   Baby,
   CalendarHeart,
   Footprints,
+  Milk,
+  ScrollText,
   Scale,
   Sparkles,
   Stethoscope,
+  Wand2,
 } from "lucide-react";
 import DueDateCalculator from "./tabs/DueDateCalculator";
 import OvulationCalculator from "./tabs/OvulationCalculator";
@@ -17,6 +20,9 @@ import SymptomChecker from "./tabs/SymptomChecker";
 import GrowthSlider from "./tabs/GrowthSlider";
 import KickCounter from "./tabs/KickCounter";
 import ContractionTimer from "./tabs/ContractionTimer";
+import ChineseGenderPredictor from "./tabs/ChineseGenderPredictor";
+import BabyFeedingTracker from "./tabs/BabyFeedingTracker";
+import BabyNameGenerator from "./tabs/BabyNameGenerator";
 
 const TABS = [
   { id: "due-date", label: "Due Date", icon: CalendarHeart, Component: DueDateCalculator },
@@ -26,6 +32,9 @@ const TABS = [
   { id: "growth", label: "Growth Slider", icon: Baby, Component: GrowthSlider },
   { id: "kicks", label: "Kick Counter", icon: Footprints, Component: KickCounter },
   { id: "contractions", label: "Contraction Timer", icon: Activity, Component: ContractionTimer },
+  { id: "gender", label: "Gender Predictor", icon: ScrollText, Component: ChineseGenderPredictor },
+  { id: "feeding", label: "Feeding Tracker", icon: Milk, Component: BabyFeedingTracker },
+  { id: "names", label: "Baby Names", icon: Wand2, Component: BabyNameGenerator },
 ] as const;
 
 export default function UtilityHub() {

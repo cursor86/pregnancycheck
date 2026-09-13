@@ -40,7 +40,7 @@ export default function SymptomChecker() {
               className={`rounded-full border px-4 py-2 text-sm font-medium transition ${
                 selected.has(s.key)
                   ? "border-accent-deep bg-accent-deep text-white shadow-md"
-                  : "border-white/70 bg-white/60 text-slate/70 hover:border-accent-deep/50"
+                  : "border-panel/70 bg-panel/60 text-ink/70 hover:border-accent-deep/50"
               }`}
             >
               {s.label}
@@ -67,7 +67,7 @@ export default function SymptomChecker() {
                 <span>Confidence score</span>
                 <span>{result.probability}%</span>
               </div>
-              <div className="h-2.5 w-full overflow-hidden rounded-full bg-white/70">
+              <div className="h-2.5 w-full overflow-hidden rounded-full bg-panel/70">
                 <div
                   className={`h-full rounded-full ${likelihoodColor} transition-all`}
                   style={{ width: `${result.probability}%` }}

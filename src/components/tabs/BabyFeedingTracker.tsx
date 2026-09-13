@@ -1,14 +1,15 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { Play, Square } from "lucide-react";
+import { Milk, Play, Square } from "lucide-react";
 
-interface Contraction {
+type Side = "left" | "right" | "bottle";
+
+interface FeedingSession {
   id: number;
-  start: Date;
-  end: Date;
+  side: Side;
   durationSec: number;
-  intervalSinceLastSec: number | null;
+  endedAt: Date;
 }
 
 function formatDuration(totalSeconds: number): string {
@@ -17,11 +18,17 @@ function formatDuration(totalSeconds: number): string {
   return `${m}:${s.toString().padStart(2, "0")}`;
 }
 
-export default function ContractionTimer() {
+const SIDES: { key: Side; label: string }[] = [
+  { key: "left", label: "Left" },
+  { key: "right", label: "Right" },
+  { key: "bottle", label: "Bottle" },
+];
+
+export default function BabyFeedingTracker() {
+  const [side, setSide] = useState<Side>("left");
   const [isRunning, setIsRunning] = useState(false);
   const [elapsed, setElapsed] = useState(0);
-  const [contractions, setContractions] = useState<Contraction[]>([]);
-  const startRef = useRef<Date | null>(null);
+  const [history, setHistory] = useState<FeedingSession[]>([]);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   useEffect(() => {
@@ -36,44 +43,54 @@ export default function ContractionTimer() {
   }, [isRunning]);
 
   function start() {
-    startRef.current = new Date();
     setElapsed(0);
     setIsRunning(true);
   }
 
   function stop() {
-    if (!startRef.current) return;
-    const end = new Date();
-    const durationSec = Math.round((end.getTime() - startRef.current.getTime()) / 1000);
-    const last = contractions[0];
-    const intervalSinceLastSec = last
-      ? Math.round((startRef.current.getTime() - last.end.getTime()) / 1000)
-      : null;
-
-    setContractions((prev) => [
-      { id: Date.now(), start: startRef.current as Date, end, durationSec, intervalSinceLastSec },
-      ...prev,
-    ]);
+    if (elapsed > 0) {
+      setHistory((prev) => [
+        { id: Date.now(), side, durationSec: elapsed, endedAt: new Date() },
+        ...prev,
+      ]);
+    }
     setIsRunning(false);
     setElapsed(0);
-    startRef.current = null;
   }
 
-  const avgDuration = contractions.length
-    ? Math.round(contractions.reduce((sum, c) => sum + c.durationSec, 0) / contractions.length)
-    : null;
-  const intervalsOnly = contractions
-    .map((c) => c.intervalSinceLastSec)
-    .filter((v): v is number => v !== null);
-  const avgInterval = intervalsOnly.length
-    ? Math.round(intervalsOnly.reduce((s, v) => s + v, 0) / intervalsOnly.length)
+  const [now, setNow] = useState(() => Date.now());
+  useEffect(() => {
+    const id = setInterval(() => setNow(Date.now()), 30000);
+    return () => clearInterval(id);
+  }, []);
+
+  const lastFeedAgo = history[0]
+    ? Math.round((now - history[0].endedAt.getTime()) / 60000)
     : null;
 
   return (
     <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
       <div className="glass flex flex-col items-center justify-center gap-6 rounded-3xl p-8 text-center">
+        <div className="flex gap-2">
+          {SIDES.map((s) => (
+            <button
+              key={s.key}
+              type="button"
+              onClick={() => setSide(s.key)}
+              disabled={isRunning}
+              className={`rounded-full px-4 py-1.5 text-sm font-medium transition disabled:cursor-not-allowed disabled:opacity-50 ${
+                side === s.key
+                  ? "bg-accent-deep text-white shadow-md"
+                  : "bg-panel/70 text-ink/70"
+              }`}
+            >
+              {s.label}
+            </button>
+          ))}
+        </div>
+
         <div>
-          <p className="text-sm text-slate/60">{isRunning ? "Contraction running" : "Ready"}</p>
+          <p className="text-sm text-slate/60">{isRunning ? "Feeding in progress" : "Timer"}</p>
           <p className="font-[family-name:var(--font-heading)] text-4xl font-medium text-slate">
             {formatDuration(elapsed)}
           </p>
@@ -97,43 +114,28 @@ export default function ContractionTimer() {
           </button>
         )}
 
-        <div className="grid grid-cols-2 gap-4 text-sm">
-          <div>
-            <p className="text-slate/60">Avg. duration</p>
-            <p className="font-semibold text-slate">
-              {avgDuration !== null ? formatDuration(avgDuration) : "—"}
-            </p>
-          </div>
-          <div>
-            <p className="text-slate/60">Avg. interval</p>
-            <p className="font-semibold text-slate">
-              {avgInterval !== null ? formatDuration(avgInterval) : "—"}
-            </p>
-          </div>
-        </div>
+        {lastFeedAgo !== null && (
+          <p className="text-sm text-slate/60">Last feed ended {lastFeedAgo} min ago</p>
+        )}
       </div>
 
       <div className="glass rounded-3xl p-6">
-        <p className="mb-3 text-sm font-medium text-slate/70">Contraction log</p>
-        {contractions.length === 0 ? (
+        <p className="mb-3 text-sm font-medium text-slate/70">Feeding log</p>
+        {history.length === 0 ? (
           <div className="flex h-40 items-center justify-center text-center text-sm text-slate/50">
-            Press start when a contraction begins, stop when it ends.
+            <Milk size={16} className="mr-2" /> Start the timer when a feed begins.
           </div>
         ) : (
           <div className="scrollbar-thin max-h-64 space-y-2 overflow-y-auto pr-1">
-            {contractions.map((c) => (
+            {history.map((h) => (
               <div
-                key={c.id}
+                key={h.id}
                 className="flex items-center justify-between rounded-xl bg-panel/60 px-4 py-2.5 text-sm"
               >
-                <span className="text-slate/60">
-                  {c.start.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
-                </span>
-                <span className="font-semibold text-slate">{formatDuration(c.durationSec)}</span>
+                <span className="font-semibold capitalize text-slate">{h.side}</span>
+                <span className="text-slate/60">{formatDuration(h.durationSec)}</span>
                 <span className="text-slate/40">
-                  {c.intervalSinceLastSec !== null
-                    ? `+${formatDuration(c.intervalSinceLastSec)} since last`
-                    : "first logged"}
+                  {h.endedAt.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
                 </span>
               </div>
             ))}

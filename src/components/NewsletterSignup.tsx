@@ -55,8 +55,8 @@ export default function NewsletterSignup() {
                 }}
                 placeholder="you@example.com"
                 aria-invalid={!!error}
-                className={`w-full rounded-full border bg-white/80 px-5 py-3 text-slate outline-none ring-accent-deep/40 transition focus:ring-2 ${
-                  error ? "border-accent-deep" : "border-white/60"
+                className={`w-full rounded-full border bg-panel/80 px-5 py-3 text-ink outline-none ring-accent-deep/40 transition focus:ring-2 ${
+                  error ? "border-accent-deep" : "border-panel/60"
                 }`}
               />
               {error && <p className="mt-1.5 ml-2 text-xs text-accent-deep">{error}</p>}

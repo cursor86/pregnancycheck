@@ -31,7 +31,7 @@ export default function DueDateCalculator() {
             type="date"
             value={lmp}
             onChange={(e) => setLmp(e.target.value)}
-            className="w-full rounded-2xl border border-white/60 bg-white/70 px-4 py-3 text-slate outline-none ring-accent-deep/40 transition focus:ring-2"
+            className="w-full rounded-2xl border border-panel/60 bg-panel/70 px-4 py-3 text-ink outline-none ring-accent-deep/40 transition focus:ring-2"
           />
         </div>
 
@@ -83,7 +83,7 @@ export default function DueDateCalculator() {
                 <span>Progress</span>
                 <span>{progress.percentComplete}%</span>
               </div>
-              <div className="h-2.5 w-full overflow-hidden rounded-full bg-white/70">
+              <div className="h-2.5 w-full overflow-hidden rounded-full bg-panel/70">
                 <div
                   className="h-full rounded-full bg-gradient-to-r from-accent to-accent-deep transition-all"
                   style={{ width: `${progress.percentComplete}%` }}

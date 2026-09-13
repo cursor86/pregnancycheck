@@ -26,7 +26,7 @@ export default function WeightGainCalculator() {
             type="number"
             value={height}
             onChange={(e) => setHeight(e.target.value)}
-            className="w-full rounded-2xl border border-white/60 bg-white/70 px-4 py-3 text-slate outline-none ring-accent-deep/40 transition focus:ring-2"
+            className="w-full rounded-2xl border border-panel/60 bg-panel/70 px-4 py-3 text-ink outline-none ring-accent-deep/40 transition focus:ring-2"
           />
         </div>
         <div>
@@ -37,7 +37,7 @@ export default function WeightGainCalculator() {
             type="number"
             value={preWeight}
             onChange={(e) => setPreWeight(e.target.value)}
-            className="w-full rounded-2xl border border-white/60 bg-white/70 px-4 py-3 text-slate outline-none ring-accent-deep/40 transition focus:ring-2"
+            className="w-full rounded-2xl border border-panel/60 bg-panel/70 px-4 py-3 text-ink outline-none ring-accent-deep/40 transition focus:ring-2"
           />
         </div>
         <div>
@@ -48,7 +48,7 @@ export default function WeightGainCalculator() {
             type="number"
             value={currentWeight}
             onChange={(e) => setCurrentWeight(e.target.value)}
-            className="w-full rounded-2xl border border-white/60 bg-white/70 px-4 py-3 text-slate outline-none ring-accent-deep/40 transition focus:ring-2"
+            className="w-full rounded-2xl border border-panel/60 bg-panel/70 px-4 py-3 text-ink outline-none ring-accent-deep/40 transition focus:ring-2"
           />
         </div>
         <label className="flex items-center gap-2 text-sm font-medium text-slate/70">
@@ -90,7 +90,7 @@ export default function WeightGainCalculator() {
               className={`rounded-xl px-4 py-2.5 text-sm font-medium ${
                 result.status === "within recommended range"
                   ? "bg-sage/60 text-slate"
-                  : "bg-blush/70 text-slate"
+                  : "bg-blush/70 text-ink"
               }`}
             >
               {result.status === "within recommended range"
