@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { EyeOff, GitFork, LayoutGrid, Microscope } from "lucide-react";
 
@@ -28,8 +29,21 @@ const VALUES = [
 
 export default function ValueGrid() {
   return (
-    <section className="px-6 py-20">
-      <div className="mx-auto max-w-5xl">
+    <section className="relative overflow-hidden px-6 py-20">
+      <div
+        className="pointer-events-none absolute -right-24 top-1/2 hidden h-[36rem] w-[36rem] -translate-y-1/2 opacity-[0.14] lg:block"
+        aria-hidden
+      >
+        <Image
+          src="/images/babycare-collage.png"
+          alt=""
+          fill
+          sizes="576px"
+          className="object-contain"
+        />
+      </div>
+
+      <div className="relative mx-auto max-w-5xl">
         <div className="mb-12 text-center">
           <h2 className="font-[family-name:var(--font-heading)] text-3xl font-medium text-slate sm:text-4xl">
             Why replace five apps with one?

@@ -1,18 +1,17 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
-import { Baby, Sparkles } from "lucide-react";
 
 /**
- * Placeholder for an interactive 3D asset (e.g. a Spline scene or a
- * Three.js canvas of a rotating baby/fruit model). Swap the inner
- * content for a real <Spline scene="..." /> or <Canvas> element when
- * a 3D asset pipeline is wired up — the outer glass frame, floating
- * animation, and sizing are ready to host either.
+ * Placeholder frame for an interactive 3D asset (e.g. a Spline scene or a
+ * Three.js canvas). Currently hosts a static illustration — swap the
+ * <Image> for a real <Spline scene="..." /> or <Canvas> element when a 3D
+ * asset pipeline is wired up; the outer glass frame, floating animation,
+ * and sizing are ready to host either.
  */
 export default function Visualizer3D({
   label = "Interactive 3D preview",
-  variant = "bump",
 }: {
   label?: string;
   variant?: "bump" | "fruit";
@@ -27,10 +26,17 @@ export default function Visualizer3D({
         transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
       >
         <motion.div
-          className="animate-float flex h-40 w-40 items-center justify-center rounded-full bg-gradient-to-br from-accent to-accent-deep text-white shadow-2xl"
-          whileHover={{ scale: 1.06 }}
+          className="animate-float relative h-[80%] w-[80%]"
+          whileHover={{ scale: 1.04 }}
         >
-          {variant === "bump" ? <Baby size={72} strokeWidth={1.4} /> : <Sparkles size={72} strokeWidth={1.4} />}
+          <Image
+            src="/images/hero-illustration.png"
+            alt="Line-art illustration of a mother holding her baby"
+            fill
+            sizes="(max-width: 768px) 320px, 400px"
+            className="object-contain drop-shadow-2xl"
+            priority
+          />
         </motion.div>
 
         <div className="absolute bottom-6 flex items-center gap-2 rounded-full bg-panel/70 px-4 py-1.5 text-xs font-medium text-ink/70 backdrop-blur">
