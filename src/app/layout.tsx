@@ -15,7 +15,7 @@ const displayFont = Fraunces({
   style: ["normal", "italic"],
 });
 
-const SITE_URL = "https://amipregnant.example.com";
+const SITE_URL = "https://cursor86.github.io/pregnancycheck";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),

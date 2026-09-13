@@ -1,6 +1,8 @@
 import type { MetadataRoute } from "next";
 
-const SITE_URL = "https://amipregnant.example.com";
+export const dynamic = "force-static";
+
+const SITE_URL = "https://cursor86.github.io/pregnancycheck";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
