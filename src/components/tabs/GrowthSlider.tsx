@@ -2,16 +2,42 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Apple } from "lucide-react";
-import { getWeekData } from "@/lib/growthData";
+import { Apple, Gamepad2, UtensilsCrossed } from "lucide-react";
+import { ComparisonTheme, getWeekData } from "@/lib/growthData";
+
+const THEMES: { key: ComparisonTheme; label: string; icon: typeof Apple }[] = [
+  { key: "fruit", label: "Fruit", icon: Apple },
+  { key: "food", label: "Food", icon: UtensilsCrossed },
+  { key: "geeky", label: "Geeky", icon: Gamepad2 },
+];
 
 export default function GrowthSlider() {
   const [week, setWeek] = useState(20);
-  const data = getWeekData(week);
+  const [theme, setTheme] = useState<ComparisonTheme>("fruit");
+  const data = getWeekData(week, theme);
+  const ThemeIcon = THEMES.find((t) => t.key === theme)?.icon ?? Apple;
 
   return (
     <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
       <div className="flex flex-col justify-center space-y-6">
+        <div className="flex gap-2">
+          {THEMES.map((t) => (
+            <button
+              key={t.key}
+              type="button"
+              onClick={() => setTheme(t.key)}
+              className={`inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-medium transition ${
+                theme === t.key
+                  ? "bg-accent-deep text-white shadow-md"
+                  : "bg-panel/70 text-ink/70"
+              }`}
+            >
+              <t.icon size={13} />
+              {t.label}
+            </button>
+          ))}
+        </div>
+
         <div>
           <label className="mb-2 block text-sm font-medium text-slate/70">
             Pregnancy week: <span className="font-semibold text-accent-deep">{week}</span>
@@ -48,7 +74,7 @@ export default function GrowthSlider() {
       <div className="relative flex items-center justify-center">
         <AnimatePresence mode="wait">
           <motion.div
-            key={data.week}
+            key={`${theme}-${data.week}`}
             initial={{ opacity: 0, scale: 0.85, rotate: -6 }}
             animate={{ opacity: 1, scale: 1, rotate: 0 }}
             exit={{ opacity: 0, scale: 0.85, rotate: 6 }}
@@ -56,7 +82,7 @@ export default function GrowthSlider() {
             className="glass-strong flex aspect-square w-full max-w-xs flex-col items-center justify-center gap-4 rounded-[2rem] p-8 text-center shadow-lg"
           >
             <div className="animate-float flex h-24 w-24 items-center justify-center rounded-full bg-gradient-to-br from-sage-deep to-sage text-white shadow-xl">
-              <Apple size={48} strokeWidth={1.4} />
+              <ThemeIcon size={48} strokeWidth={1.4} />
             </div>
             <p className="text-sm text-slate/60">Baby is about the size of a</p>
             <p className="font-[family-name:var(--font-heading)] text-2xl font-medium text-slate">

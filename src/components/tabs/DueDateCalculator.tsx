@@ -9,9 +9,12 @@ const dateFmt = new Intl.DateTimeFormat("en-US", {
   year: "numeric",
 });
 
+const DAY_MS = 24 * 60 * 60 * 1000;
+
 export default function DueDateCalculator() {
   const [lmp, setLmp] = useState("");
   const [cycleLength, setCycleLength] = useState(28);
+  const [isTwins, setIsTwins] = useState(false);
 
   const progress = useMemo(() => {
     if (!lmp) return null;
@@ -19,6 +22,13 @@ export default function DueDateCalculator() {
     if (Number.isNaN(lmpDate.getTime())) return null;
     return calculateProgress(lmpDate, cycleLength);
   }, [lmp, cycleLength]);
+
+  // Twin pregnancies are typically dated the same way (LMP + 280 days), but
+  // average delivery timing runs earlier — commonly cited around 36 weeks.
+  const twinDeliveryEstimate = useMemo(() => {
+    if (!progress || !isTwins) return null;
+    return new Date(progress.dueDate.getTime() - 28 * DAY_MS);
+  }, [progress, isTwins]);
 
   return (
     <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
@@ -49,6 +59,17 @@ export default function DueDateCalculator() {
             style={{ accentColor: "var(--accent-deep)" }}
           />
         </div>
+
+        <label className="flex items-center gap-2 text-sm font-medium text-slate/70">
+          <input
+            type="checkbox"
+            checked={isTwins}
+            onChange={(e) => setIsTwins(e.target.checked)}
+            className="h-4 w-4"
+            style={{ accentColor: "var(--accent-deep)" }}
+          />
+          Expecting twins
+        </label>
       </div>
 
       <div className="glass rounded-3xl p-6">
@@ -95,6 +116,13 @@ export default function DueDateCalculator() {
               {progress.daysRemaining} days to go &middot; conceived around{" "}
               {dateFmt.format(progress.conceptionDate)}
             </p>
+
+            {twinDeliveryEstimate && (
+              <div className="rounded-xl bg-blush/70 px-4 py-2.5 text-sm text-ink">
+                Twin pregnancies often arrive earlier — many reach full term around 36
+                weeks, roughly <strong>{dateFmt.format(twinDeliveryEstimate)}</strong>.
+              </div>
+            )}
           </div>
         )}
       </div>
