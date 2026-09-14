@@ -26,12 +26,12 @@ export default function Visualizer3D({
         transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
       >
         <motion.div
-          className="animate-float relative h-[80%] w-[80%]"
+          className="animate-float relative h-[88%] w-[88%]"
           whileHover={{ scale: 1.04 }}
         >
           <Image
-            src="/images/hero-illustration.png"
-            alt="Line-art illustration of a mother holding her baby"
+            src="/images/hero-illustration-2.jpg"
+            alt="Watercolor illustration of a pregnant woman surrounded by flowers and hearts"
             fill
             sizes="(max-width: 768px) 320px, 400px"
             className="object-contain drop-shadow-2xl"

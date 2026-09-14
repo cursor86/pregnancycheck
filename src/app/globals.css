@@ -1,19 +1,19 @@
 @import "tailwindcss";
 
 :root {
-  --background: #0a0c07;
-  --foreground: #eef0e4;
+  --background: #fdf6ef;
+  --foreground: #3d2b28;
 
-  --blush: #d8a94a;
-  --blush-deep: #b8862c;
-  --sage: #3d4a26;
-  --sage-deep: #7c9a3f;
-  --cream: #14170e;
-  --slate: #eef0e4;
-  --accent: #7c9a3f;
-  --accent-deep: #556b2f;
-  --panel: #eef0e4;
-  --ink: #171b0e;
+  --blush: #f2c14e;
+  --blush-deep: #d99a2b;
+  --sage: #bfe0d4;
+  --sage-deep: #4f9182;
+  --cream: #fffaf3;
+  --slate: #3d2b28;
+  --accent: #ef7a55;
+  --accent-deep: #d1512f;
+  --panel: #ffffff;
+  --ink: #3d2b28;
 }
 
 @theme inline {
@@ -34,25 +34,26 @@
 }
 
 body {
-  background: radial-gradient(ellipse 120% 80% at 20% -10%, #1b220f 0%, transparent 60%),
-    radial-gradient(ellipse 100% 60% at 100% 20%, #131a0c 0%, transparent 55%),
-    linear-gradient(180deg, #0a0c07 0%, #0d0f09 50%, #080905 100%);
+  background: radial-gradient(ellipse 110% 70% at 15% -10%, rgba(242, 193, 78, 0.35) 0%, transparent 60%),
+    radial-gradient(ellipse 100% 60% at 100% 10%, rgba(191, 224, 212, 0.4) 0%, transparent 55%),
+    radial-gradient(ellipse 90% 60% at 50% 110%, rgba(239, 122, 85, 0.18) 0%, transparent 60%),
+    linear-gradient(180deg, #fdf6ef 0%, #fbf1e6 50%, #fdf6ef 100%);
   color: var(--foreground);
   font-family: var(--font-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
 .glass {
-  background: rgba(238, 240, 228, 0.06);
+  background: rgba(255, 255, 255, 0.55);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(238, 240, 228, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.7);
 }
 
 .glass-strong {
-  background: rgba(238, 240, 228, 0.09);
+  background: rgba(255, 255, 255, 0.72);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(238, 240, 228, 0.16);
+  border: 1px solid rgba(255, 255, 255, 0.85);
 }
 
 .text-balance {
