@@ -135,7 +135,7 @@ export default function ContractionTimer() {
                 className="flex items-center justify-between rounded-xl bg-panel/60 px-4 py-2.5 text-sm"
               >
                 <span className="text-slate/60">
-                  {c.start.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
+                  {c.start?.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }) ?? "—"}
                 </span>
                 <span className="font-semibold text-slate">{formatDuration(c.durationSec)}</span>
                 <span className="text-slate/40">

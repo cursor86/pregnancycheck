@@ -23,6 +23,7 @@ import ContractionTimer from "./tabs/ContractionTimer";
 import ChineseGenderPredictor from "./tabs/ChineseGenderPredictor";
 import BabyFeedingTracker from "./tabs/BabyFeedingTracker";
 import BabyNameGenerator from "./tabs/BabyNameGenerator";
+import ToolErrorBoundary from "./ToolErrorBoundary";
 
 const TABS = [
   { id: "due-date", label: "Due Date", icon: CalendarHeart, Component: DueDateCalculator },
@@ -78,7 +79,9 @@ export default function UtilityHub() {
         <div className="glass-strong rounded-[2rem] p-6 shadow-xl shadow-accent-deep/5 sm:p-10">
           {TABS.map(({ id, Component }) => (
             <div key={id} hidden={id !== activeTab}>
-              <Component />
+              <ToolErrorBoundary>
+                <Component />
+              </ToolErrorBoundary>
             </div>
           ))}
         </div>
