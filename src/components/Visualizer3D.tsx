@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { assetPath } from "@/lib/basePath";
 
 /**
  * Placeholder frame for an interactive 3D asset (e.g. a Spline scene or a
@@ -30,7 +31,7 @@ export default function Visualizer3D({
           whileHover={{ scale: 1.04 }}
         >
           <Image
-            src="/images/hero-illustration-2.jpg"
+            src={assetPath("/images/hero-illustration-2.jpg")}
             alt="Watercolor illustration of a pregnant woman surrounded by flowers and hearts"
             fill
             sizes="(max-width: 768px) 320px, 400px"

@@ -5,13 +5,20 @@ import type { NextConfig } from "next";
 // root deploys stay unaffected since this only applies when GITHUB_PAGES is set.
 const isGithubPages = process.env.GITHUB_PAGES === "true";
 const repoName = "pregnancycheck";
+const basePath = isGithubPages ? `/${repoName}` : "";
 
 const nextConfig: NextConfig = {
   output: "export",
-  basePath: isGithubPages ? `/${repoName}` : "",
+  basePath,
   assetPrefix: isGithubPages ? `/${repoName}/` : "",
   images: {
     unoptimized: true,
+  },
+  // next/image's unoptimized <img src> does not automatically get the
+  // basePath prefix applied, unlike JS/CSS assets — expose it so
+  // components can prefix plain image paths themselves.
+  env: {
+    NEXT_PUBLIC_BASE_PATH: basePath,
   },
 };
 

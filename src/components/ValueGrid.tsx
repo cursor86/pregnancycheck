@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { assetPath } from "@/lib/basePath";
 import { EyeOff, GitFork, LayoutGrid, Microscope } from "lucide-react";
 
 const VALUES = [
@@ -35,7 +36,7 @@ export default function ValueGrid() {
         aria-hidden
       >
         <Image
-          src="/images/babycare-collage.png"
+          src={assetPath("/images/babycare-collage.png")}
           alt=""
           fill
           sizes="576px"
