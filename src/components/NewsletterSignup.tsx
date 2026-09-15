@@ -1,7 +1,9 @@
 "use client";
 
+import Image from "next/image";
 import { FormEvent, useState } from "react";
 import { CheckCircle2, Mail } from "lucide-react";
+import { assetPath } from "@/lib/basePath";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -31,7 +33,23 @@ export default function NewsletterSignup() {
   }
 
   return (
-    <section id="newsletter" className="px-6 py-20">
+    <section id="newsletter" className="relative px-6 py-20">
+      <Image
+        src={assetPath("/images/decor/lime.png")}
+        alt=""
+        width={48}
+        height={48}
+        aria-hidden
+        className="animate-float pointer-events-none absolute left-[12%] top-6 hidden opacity-80 drop-shadow-md sm:block"
+      />
+      <Image
+        src={assetPath("/images/decor/watermelon.png")}
+        alt=""
+        width={54}
+        height={54}
+        aria-hidden
+        className="animate-float-slow pointer-events-none absolute right-[10%] bottom-8 hidden opacity-80 drop-shadow-md sm:block"
+      />
       <div className="glass-strong mx-auto max-w-3xl rounded-[2.5rem] p-10 text-center shadow-xl shadow-accent-deep/10 sm:p-14">
         <div className="mx-auto mb-5 inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-accent to-accent-deep text-white">
           <Mail size={22} />

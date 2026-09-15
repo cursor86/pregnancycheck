@@ -1,7 +1,9 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { ShieldCheck, Sparkles } from "lucide-react";
+import { assetPath } from "@/lib/basePath";
 import Visualizer3D from "./Visualizer3D";
 
 export default function Hero() {
@@ -9,6 +11,31 @@ export default function Hero() {
     <section className="relative overflow-hidden px-6 pt-16 pb-20 sm:pt-24 sm:pb-28">
       <div className="pointer-events-none absolute -top-24 -left-24 h-72 w-72 rounded-full bg-blush/50 blur-3xl" />
       <div className="pointer-events-none absolute top-40 -right-20 h-80 w-80 rounded-full bg-sage/50 blur-3xl" />
+
+      <Image
+        src={assetPath("/images/decor/marigold.png")}
+        alt=""
+        width={56}
+        height={56}
+        aria-hidden
+        className="animate-float-slow pointer-events-none absolute left-[6%] top-[14%] hidden opacity-80 drop-shadow-md sm:block"
+      />
+      <Image
+        src={assetPath("/images/decor/daisy.png")}
+        alt=""
+        width={40}
+        height={40}
+        aria-hidden
+        className="animate-float pointer-events-none absolute right-[8%] top-[8%] hidden opacity-80 drop-shadow-md md:block"
+      />
+      <Image
+        src={assetPath("/images/decor/strawberry.png")}
+        alt=""
+        width={46}
+        height={46}
+        aria-hidden
+        className="animate-float-slow pointer-events-none absolute left-[10%] bottom-[10%] hidden opacity-85 drop-shadow-md lg:block"
+      />
 
       <div className="mx-auto grid max-w-6xl grid-cols-1 items-center gap-12 md:grid-cols-2">
         <motion.div
