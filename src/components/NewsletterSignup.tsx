@@ -7,6 +7,7 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export default function NewsletterSignup() {
   const [email, setEmail] = useState("");
+  const [dueDate, setDueDate] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [submitted, setSubmitted] = useState(false);
 
@@ -16,7 +17,16 @@ export default function NewsletterSignup() {
       setError("Please enter a valid email address.");
       return;
     }
+    if (!dueDate) {
+      setError("Please enter your due date so we can time your weekly emails.");
+      return;
+    }
     setError(null);
+
+    // TODO: once ConvertKit is set up, POST { email, due_date: dueDate } to
+    // the form's API endpoint here instead of only setting local state —
+    // see docs/newsletter-templates.md for the setup steps and the fields
+    // ConvertKit expects.
     setSubmitted(true);
   }
 
@@ -27,25 +37,26 @@ export default function NewsletterSignup() {
           <Mail size={22} />
         </div>
         <h2 className="font-[family-name:var(--font-heading)] text-2xl font-medium text-slate sm:text-3xl">
-          Get Weekly 3D Development Reports
+          Get Your Weekly Pregnancy Journey
         </h2>
         <p className="mx-auto mt-3 max-w-md text-slate/60">
-          A friendly weekly note on your baby&apos;s development, milestones, and new
-          calculator features. No spam, unsubscribe anytime.
+          One email a week, timed to exactly where you are — baby&apos;s development,
+          what to expect in your body, and a tip for the week. No spam, unsubscribe
+          anytime.
         </p>
 
         {submitted ? (
           <div className="mt-7 inline-flex items-center gap-2 rounded-full bg-sage/70 px-5 py-3 font-medium text-slate">
             <CheckCircle2 size={18} className="text-sage-deep" />
-            You&apos;re on the list — check your inbox soon!
+            You&apos;re on the list — your first email lands this week!
           </div>
         ) : (
           <form
             onSubmit={handleSubmit}
-            className="mx-auto mt-7 flex max-w-md flex-col gap-3 sm:flex-row"
+            className="mx-auto mt-7 flex max-w-md flex-col gap-3"
             noValidate
           >
-            <div className="flex-1 text-left">
+            <div className="text-left">
               <input
                 type="email"
                 value={email}
@@ -59,11 +70,28 @@ export default function NewsletterSignup() {
                   error ? "border-accent-deep" : "border-panel/60"
                 }`}
               />
-              {error && <p className="mt-1.5 ml-2 text-xs text-accent-deep">{error}</p>}
             </div>
+            <div className="text-left">
+              <label className="mb-1.5 ml-2 block text-xs font-medium text-slate/60">
+                Your estimated due date
+              </label>
+              <input
+                type="date"
+                value={dueDate}
+                onChange={(e) => {
+                  setDueDate(e.target.value);
+                  if (error) setError(null);
+                }}
+                aria-invalid={!!error}
+                className={`w-full rounded-full border bg-panel/80 px-5 py-3 text-ink outline-none ring-accent-deep/40 transition focus:ring-2 ${
+                  error ? "border-accent-deep" : "border-panel/60"
+                }`}
+              />
+            </div>
+            {error && <p className="ml-2 text-left text-xs text-accent-deep">{error}</p>}
             <button
               type="submit"
-              className="rounded-full bg-accent-deep px-6 py-3 font-semibold text-white shadow-lg shadow-accent-deep/30 transition hover:-translate-y-0.5 hover:bg-accent"
+              className="mt-1 rounded-full bg-accent-deep px-6 py-3 font-semibold text-white shadow-lg shadow-accent-deep/30 transition hover:-translate-y-0.5 hover:bg-accent"
             >
               Subscribe
             </button>
