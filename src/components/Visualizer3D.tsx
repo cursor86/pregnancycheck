@@ -31,7 +31,7 @@ export default function Visualizer3D({
           whileHover={{ scale: 1.04 }}
         >
           <Image
-            src={assetPath("/images/hero-illustration-2.jpg")}
+            src={assetPath("/images/hero-illustration-v2.jpg")}
             alt="Watercolor illustration of a pregnant woman surrounded by flowers and hearts"
             fill
             sizes="(max-width: 768px) 320px, 400px"

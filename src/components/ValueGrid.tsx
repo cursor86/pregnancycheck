@@ -36,7 +36,7 @@ export default function ValueGrid() {
         aria-hidden
       >
         <Image
-          src={assetPath("/images/babycare-collage.png")}
+          src={assetPath("/images/babycare-collage-v2.png")}
           alt=""
           fill
           sizes="576px"

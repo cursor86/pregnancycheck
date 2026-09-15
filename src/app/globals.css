@@ -1,19 +1,21 @@
 @import "tailwindcss";
 
+/* Palette sampled directly from the hero watercolor illustration
+   (dominant-color extraction), not hand-picked. */
 :root {
   --background: #fdf6ef;
-  --foreground: #3d2b28;
+  --foreground: #3d2620;
 
-  --blush: #f2c14e;
-  --blush-deep: #d99a2b;
-  --sage: #bfe0d4;
-  --sage-deep: #4f9182;
-  --cream: #fffaf3;
-  --slate: #3d2b28;
-  --accent: #ef7a55;
-  --accent-deep: #d1512f;
+  --blush: #f6d48b;
+  --blush-deep: #f5b564;
+  --sage: #d5dcd3;
+  --sage-deep: #7a867e;
+  --cream: #f6efe0;
+  --slate: #3d2620;
+  --accent: #e87a4a;
+  --accent-deep: #ca4d30;
   --panel: #ffffff;
-  --ink: #3d2b28;
+  --ink: #3d2620;
 }
 
 @theme inline {
@@ -34,10 +36,10 @@
 }
 
 body {
-  background: radial-gradient(ellipse 110% 70% at 15% -10%, rgba(242, 193, 78, 0.35) 0%, transparent 60%),
-    radial-gradient(ellipse 100% 60% at 100% 10%, rgba(191, 224, 212, 0.4) 0%, transparent 55%),
-    radial-gradient(ellipse 90% 60% at 50% 110%, rgba(239, 122, 85, 0.18) 0%, transparent 60%),
-    linear-gradient(180deg, #fdf6ef 0%, #fbf1e6 50%, #fdf6ef 100%);
+  background: radial-gradient(ellipse 110% 70% at 15% -10%, rgba(245, 181, 100, 0.35) 0%, transparent 60%),
+    radial-gradient(ellipse 100% 60% at 100% 10%, rgba(213, 220, 211, 0.45) 0%, transparent 55%),
+    radial-gradient(ellipse 90% 60% at 50% 110%, rgba(232, 122, 74, 0.18) 0%, transparent 60%),
+    linear-gradient(180deg, #fdf6ef 0%, #f6efe0 50%, #fdf6ef 100%);
   color: var(--foreground);
   font-family: var(--font-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
