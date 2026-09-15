@@ -184,3 +184,10 @@ export function getWeekData(week: number, theme: ComparisonTheme = "fruit"): Wee
   const stats = GROWTH_WEEKS.find((w) => w.week === clamped) ?? GROWTH_WEEKS[GROWTH_WEEKS.length - 1];
   return { ...stats, comparison: COMPARISONS[theme][clamped] };
 }
+
+// A real photo of each week's fruit/veg comparison (fruit theme only — the
+// food/geeky comparisons don't have a matching real-world photo).
+export function getFruitPhoto(week: number): string {
+  const clamped = Math.min(Math.max(week, 4), 40);
+  return `/images/growth/${clamped}.jpg`;
+}

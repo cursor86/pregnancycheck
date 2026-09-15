@@ -42,7 +42,15 @@ export default function ContractionTimer() {
   }
 
   function stop() {
-    if (!startRef.current) return;
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+      intervalRef.current = null;
+    }
+    if (!startRef.current) {
+      setIsRunning(false);
+      setElapsed(0);
+      return;
+    }
     const end = new Date();
     const durationSec = Math.round((end.getTime() - startRef.current.getTime()) / 1000);
     const last = contractions[0];

@@ -1,9 +1,11 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { Apple, Gamepad2, UtensilsCrossed } from "lucide-react";
-import { ComparisonTheme, getWeekData } from "@/lib/growthData";
+import { ComparisonTheme, getFruitPhoto, getWeekData } from "@/lib/growthData";
+import { assetPath } from "@/lib/basePath";
 
 const THEMES: { key: ComparisonTheme; label: string; icon: typeof Apple }[] = [
   { key: "fruit", label: "Fruit", icon: Apple },
@@ -81,9 +83,21 @@ export default function GrowthSlider() {
             transition={{ duration: 0.35, ease: "easeOut" }}
             className="glass-strong flex aspect-square w-full max-w-xs flex-col items-center justify-center gap-4 rounded-[2rem] p-8 text-center shadow-lg"
           >
-            <div className="animate-float flex h-24 w-24 items-center justify-center rounded-full bg-gradient-to-br from-sage-deep to-sage text-white shadow-xl">
-              <ThemeIcon size={48} strokeWidth={1.4} />
-            </div>
+            {theme === "fruit" ? (
+              <div className="animate-float relative h-24 w-24 overflow-hidden rounded-full shadow-xl ring-4 ring-white/60">
+                <Image
+                  src={assetPath(getFruitPhoto(data.week))}
+                  alt={data.comparison}
+                  fill
+                  sizes="96px"
+                  className="object-cover"
+                />
+              </div>
+            ) : (
+              <div className="animate-float flex h-24 w-24 items-center justify-center rounded-full bg-gradient-to-br from-sage-deep to-sage text-white shadow-xl">
+                <ThemeIcon size={48} strokeWidth={1.4} />
+              </div>
+            )}
             <p className="text-sm text-slate/60">Baby is about the size of a</p>
             <p className="font-[family-name:var(--font-heading)] text-2xl font-medium text-slate">
               {data.comparison}
