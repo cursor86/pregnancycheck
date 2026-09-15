@@ -29,7 +29,7 @@ const VALUES = [
 
 export default function ValueGrid() {
   return (
-    <section className="relative overflow-hidden px-6 py-20">
+    <section id="why-us" className="relative overflow-hidden px-6 py-20">
       <div
         className="pointer-events-none absolute -right-24 top-1/2 hidden h-[36rem] w-[36rem] -translate-y-1/2 opacity-[0.14] lg:block"
         aria-hidden

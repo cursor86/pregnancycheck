@@ -60,6 +60,16 @@ body {
   text-wrap: balance;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
+#hub,
+#why-us,
+#newsletter {
+  scroll-margin-top: 6rem;
+}
+
 ::selection {
   background: var(--accent-deep);
   color: white;

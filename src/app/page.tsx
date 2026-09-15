@@ -1,3 +1,4 @@
+import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import UtilityHub from "@/components/UtilityHub";
 import ValueGrid from "@/components/ValueGrid";
@@ -46,13 +47,14 @@ const faqJsonLd = {
 
 export default function Home() {
   return (
-    <main className="flex-1">
+    <main id="top" className="flex-1">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(faqJsonLd).replace(/</g, "\\u003c"),
         }}
       />
+      <Navbar />
       <Hero />
       <UtilityHub />
       <ValueGrid />
