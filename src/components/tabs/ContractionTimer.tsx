@@ -51,15 +51,16 @@ export default function ContractionTimer() {
       setElapsed(0);
       return;
     }
+    const start = startRef.current;
     const end = new Date();
-    const durationSec = Math.round((end.getTime() - startRef.current.getTime()) / 1000);
+    const durationSec = Math.round((end.getTime() - start.getTime()) / 1000);
     const last = contractions[0];
     const intervalSinceLastSec = last
-      ? Math.round((startRef.current.getTime() - last.end.getTime()) / 1000)
+      ? Math.round((start.getTime() - last.end.getTime()) / 1000)
       : null;
 
     setContractions((prev) => [
-      { id: Date.now(), start: startRef.current as Date, end, durationSec, intervalSinceLastSec },
+      { id: Date.now(), start, end, durationSec, intervalSinceLastSec },
       ...prev,
     ]);
     setIsRunning(false);
